@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 1em;
+        }
+        header img {
+            width: 50px;
+            vertical-align: middle;
+        }
+        header h1 {
+            display: inline;
+            margin: 0;
+            vertical-align: middle;
+        }
+        main {
+            padding: 20px;
+        }
+        section {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            margin-top: 0;
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+        }
+        .section-header img {
+            width: 30px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        input[type="number"], input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="images/fitness.jpeg" alt="Logo">
+    <h1>Fitness Tracker</h1>
+</header>
+
+<main>
+    <section>
+        <div class="section-header">
+            <img src="images/steps.jpeg" alt="Step Logo" onclick="startStepCounter()">
+            <button onclick="startsStepCounter()">Step Count</a></button>
+        </div>
+    </section>
+
+    <section>
+        <div class="section-header">
+            <img src="images/statistics.jpeg" alt="Statistics Logo" onclick="showStatistics()">
+            <h2>Personal Statistics</h2>
+            <button onclick="getPersonalStatistics()">Get Personal Statistics</a></button>
+    </section>
+
+    <section>
+        <h2>Food Diet Plan</h2>
+        <form id="dietForm">
+            <img src="images/diet.jpeg" alt="food diet" onclick="recommendFood()">
+            <button type="button" onclick="recommendFood()">Get Diet Plan</button>
+        </form>
+        <p id="dietRecommendation"></p>
+    </section>
+
+    <section>
+        <h2>Workout Plans</h2>
+        <img src="images/workout.jpeg" alt="Workout Plans">
+        <button onclick="getWorkoutPlans()">Get Workout Plans</button>
+        <ul id="workoutPlans">
+    </section>
+    <button onclick="logout()">Log out</button>
+</main>
+
+<script>
+    function startStepCounter() {
+        alert("Step counter started!");
+        // Add functionality to start step counter here
+    }
+
+    function showStatistics() {
+        alert("Showing personal statistics!");
+        // Add functionality to show personal statistics here
+    }
+
+    function recommendFood() {
+
+        document.getElementById('dietRecommendation').innerText = recommendation;
+    }
+    function getPersonalStatistics(){
+        window.location.href='personal_statistics.html';
+    }
+    function startsStepCounter(){
+        window.location.href='steps.html';
+    }
+    function getWorkoutPlans(){
+        window.location.href='workout.html';
+    }
+    function logout(){
+        window.location.href="index.html";
+}
+function recommendFood(){
+    window.location.href='fooddiet.html';
+}
+</script>
+
+</body>
+</html>

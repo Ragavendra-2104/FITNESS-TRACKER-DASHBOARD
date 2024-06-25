@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Statistics</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 1em;
+            width: 100%;
+        }
+        header img {
+            width: 50px;
+            vertical-align: middle;
+        }
+        header h1 {
+            display: inline;
+            margin: 0;
+            vertical-align: middle;
+        }
+        main {
+            text-align: center;
+            width: 100%;
+            max-width: 600px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        section {
+            margin-bottom: 20px;
+        }
+        h2 {
+            margin-top: 0;
+        }
+        input[type="number"], select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="images/statistics.jpeg" alt="Logo">
+    <h1>Personal Statistics</h1>
+</header>
+
+<main>
+    <section>
+        <h2>Track Exercise</h2>
+        <form id="exerciseForm">
+            <label for="exerciseType">Exercise Type:</label>
+            <select id="exerciseType" name="exerciseType" required>
+                <option value="running">Running</option>
+                <option value="cycling">Cycling</option>
+                <option value="weightlifting">Weightlifting</option>
+                <option value="swimming">Swimming</option>
+                <option value="yoga">Yoga</option>
+                <option value="chest">Chest Exercise</option>
+                <option value="shoulder">Shoulder Exercise</option>
+                <option value="cardio">Cardio</option>
+                <option value="leg">Leg Exercise</option>
+                <option value="biceps">Biceps Exercise</option>
+                <option value="triceps">Triceps Exercise</option>
+                <option value="bodyFunctional">Body Functional Exercise</option>
+            </select>
+            <label for="duration">Duration (minutes):</label>
+            <input type="number" id="duration" name="duration" required>
+            <button type="button" onclick="calculateStatistics()">Calculate</button>
+        </form>
+        <p id="caloriesBurned"></p>
+        <p id="muscleGain"></p>
+    </section>
+
+    <section>
+        <h2>Exercise Summary</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Exercise</th>
+                    <th>Duration (min)</th>
+                    <th>Calories Burned</th>
+                    <th>Muscle Gain (kg)</th>
+                </tr>
+            </thead>
+            <tbody id="summaryTableBody">
+                <!-- Summary rows will be added here dynamically -->
+            </tbody>
+        </table>
+    </section>
+    <button onclick="goBack()">Go Back</button>
+</main>
+
+<script>
+    const exerciseData = {
+        running: { caloriesPerMinute: 10, muscleGainPerMinute: 0.005 },
+        cycling: { caloriesPerMinute: 8, muscleGainPerMinute: 0.004 },
+        weightlifting: { caloriesPerMinute: 6, muscleGainPerMinute: 0.02 },
+        swimming: { caloriesPerMinute: 7, muscleGainPerMinute: 0.007 },
+        yoga: { caloriesPerMinute: 4, muscleGainPerMinute: 0.002 },
+        chest: { caloriesPerMinute: 5, muscleGainPerMinute: 0.015 },
+        shoulder: { caloriesPerMinute: 5, muscleGainPerMinute: 0.015 },
+        cardio: { caloriesPerMinute: 9, muscleGainPerMinute: 0.004 },
+        leg: { caloriesPerMinute: 8, muscleGainPerMinute: 0.02 },
+        biceps: { caloriesPerMinute: 6, muscleGainPerMinute: 0.018 },
+        triceps: { caloriesPerMinute: 6, muscleGainPerMinute: 0.018 },
+        bodyFunctional: { caloriesPerMinute: 7, muscleGainPerMinute: 0.012 }
+    };
+
+    function calculateStatistics() {
+        const exerciseType = document.getElementById('exerciseType').value;
+        const duration = parseInt(document.getElementById('duration').value, 10);
+
+        if (exerciseType && duration) {
+            const caloriesBurned = exerciseData[exerciseType].caloriesPerMinute * duration;
+            const muscleGain = exerciseData[exerciseType].muscleGainPerMinute * duration;
+
+            document.getElementById('caloriesBurned').innerText = `Calories Burned: ${caloriesBurned} kcal`;
+            document.getElementById('muscleGain').innerText = `Muscle Gain: ${muscleGain.toFixed(3)} kg`;
+
+            addSummaryRow(exerciseType, duration, caloriesBurned, muscleGain);
+        }
+    }
+
+    function addSummaryRow(exercise, duration, calories, muscle) {
+        const summaryTableBody = document.getElementById('summaryTableBody');
+        const row = document.createElement('tr');
+
+        const exerciseCell = document.createElement('td');
+        exerciseCell.innerText = exercise.charAt(0).toUpperCase() + exercise.slice(1);
+        row.appendChild(exerciseCell);
+
+        const durationCell = document.createElement('td');
+        durationCell.innerText = duration;
+        row.appendChild(durationCell);
+
+        const caloriesCell = document.createElement('td');
+        caloriesCell.innerText = calories;
+        row.appendChild(caloriesCell);
+
+        const muscleCell = document.createElement('td');
+        muscleCell.innerText = muscle.toFixed(3);
+        row.appendChild(muscleCell);
+
+        summaryTableBody.appendChild(row);
+    }
+    function goBack(){
+        window.location.href='fitness.html';
+    }
+</script>
+
+</body>
+</html>

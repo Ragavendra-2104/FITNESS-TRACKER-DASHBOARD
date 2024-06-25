@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 1em;
+            width: 100%;
+        }
+        header h1 {
+            margin: 0;
+        }
+        main {
+            text-align: center;
+            width: 100%;
+            max-width: 600px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Workout Page</h1>
+</header>
+
+<main>
+    <button onclick="redirectToExercise('Chest')">Chest</button>
+    <button onclick="redirectToExercise('Shoulder')">Shoulder</button>
+    <button onclick="redirectToExercise('Biceps')">Biceps</button>
+    <button onclick="redirectToExercise('Triceps')">Triceps</button>
+    <button onclick="redirectToExercise('Leg')">Leg</button>
+    <button onclick="redirectToExercise('Lat')">Lat</button>
+    <button onclick="redirectToExercise('Cardio')">Cardio</button>
+</main>
+<button onclick="goBack()">Go Back</button>
+<script>
+    function redirectToExercise(exercise) {
+        switch(exercise) {
+            case 'Chest':
+                window.location.href = 'chest_exercise.html';
+                break;
+            case 'Shoulder':
+                window.location.href = 'shoulder_exercise.html';
+                break;
+            case 'Biceps':
+                window.location.href = 'biceps_exercise.html';
+                break;
+            case 'Triceps':
+                window.location.href = 'triceps_exercise.html';
+                break;
+            case 'Leg':
+                window.location.href = 'leg_exercise.html';
+                break;
+            case 'Lat':
+                window.location.href = 'lat_exercise.html';
+                break;
+            case 'Cardio':
+                window.location.href = 'cardio_exercise.html';
+                break;
+            default:
+                break;
+        }
+    }
+    function goBack(){
+        window.location.href='fitness.html';
+    }
+</script>
+</body>
+</html>

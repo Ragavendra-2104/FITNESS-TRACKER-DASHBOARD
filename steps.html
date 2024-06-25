@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step Counter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 1em;
+            width: 100%;
+        }
+        header img {
+            width: 50px;
+            vertical-align: middle;
+        }
+        header h1 {
+            display: inline;
+            margin: 0;
+            vertical-align: middle;
+        }
+        main {
+            text-align: center;
+        }
+        p {
+            font-size: 1.5em;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="images/steps.jpeg" alt="Logo">
+    <h1>Step Counter</h1>
+</header>
+
+<main>
+    <p>Steps: <span id="stepCount">0</span></p>
+    <button onclick="startStepCounting()">Start Counting Steps</button>
+    <button onclick="GoBack()">Go Back</a></button>
+</main>
+
+<script>
+    let stepCount = 0;
+    let isCounting = false;
+
+    function startStepCounting() {
+        if (isCounting) return; // Prevent multiple intervals
+        isCounting = true;
+        if (typeof DeviceMotionEvent.requestPermission === 'function') {
+            // Request permission for iOS devices
+            DeviceMotionEvent.requestPermission().then(permissionState => {
+                if (permissionState === 'granted') {
+                    window.addEventListener('devicemotion', handleMotionEvent);
+                }
+            }).catch(console.error);
+        } else {
+            // For non-iOS devices
+            window.addEventListener('devicemotion', handleMotionEvent);
+        }
+    }
+
+    function handleMotionEvent(event) {
+        const acceleration = event.accelerationIncludingGravity;
+        const accMagnitude = Math.sqrt(acceleration.x ** 2 + acceleration.y ** 2 + acceleration.z ** 2);
+
+        if (accMagnitude > 12) { // Adjust this threshold as needed
+            stepCount++;
+            document.getElementById('stepCount').innerText = stepCount;
+        }
+    }
+    function GoBack(){
+        window.location.href='fitness.html';
+    }
+</script>
+
+</body>
+</html>
